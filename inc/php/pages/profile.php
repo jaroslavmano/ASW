@@ -22,7 +22,7 @@ if(!isset($_GET["id"])){
 	$basicURL = "?page=profile&id=".$_GET["id"];
 	$bckLink = "?page=members";
 }
-	if(!in_array("users_display",$LoginPermission) && $_GET["id"] != $userInfo[0]["User_ID"] && isset($_GET["id"])){
+	if(!in_array("users_display",$LoginPermission) && $type == false && isset($_GET["id"])){
 		echo'<meta http-equiv="refresh" content="0;url=?page=main"> ';
 	}
 ?>
@@ -85,12 +85,19 @@ if(!isset($_GET["id"])){
 			  </div>
 		  </div>
 		  <?php
-			/*<section class="mt-5 mb-5 leading-8">
-		  <span class="bg-blue-100 text-blue-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Zdravotník</span>
-<span class="bg-gray-100 text-gray-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Střelec</span>
-<span class="bg-red-100 text-red-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Rekrut</span>
-		  </section>*/
-	?>
+          if(in_array("tag_display",$LoginPermission) && $modules->VerifyModule("TAG") == 1){
+                echo '<section class="mt-5 mb-5 leading-8">';
+                    $tags = $user->UserTags();
+                    if(!empty($tags)){
+                        foreach ($tags as $tag){
+                            $tagClass = new Tags($tag);
+                            $tagInfo = $tagClass->Info();
+                            echo '<span class="bg-['.$tagInfo["Tag_Color"].'] text-['.$tagInfo["Tag_TextColor"].'] text-base font-medium mr-2 px-2.5 py-0.5 whitespace-nowrap rounded">'.$tagInfo["Tag_Name"].' ('.$tagInfo["Tag_Short"].')</span>';
+                        }
+                    }
+                echo '</section>';
+          }
+          ?>
 	 <div class="space-y-2 px-2 pt-2 pb-3 bg-[<?=$system->SystemSettings["menu/foot_bg"]?>] mt-4 rounded-lg">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 	<?php

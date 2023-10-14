@@ -22,7 +22,7 @@
     }
 if(isset($_POST["SaveInfoUser"])){
 	if(isset($_GET["id"])){
-		$result = $users->UserUpdateBasic($_POST["name"], $_POST["username"], $_POST["date"],isset($_POST["display_bday"]),$_POST["alergy"]);
+		$result = $users->UserUpdateBasic($_POST["name"], (isset($_POST["username"])?$_POST["username"]:""), $_POST["date"],isset($_POST["display_bday"]),$_POST["alergy"]);
 		if($result === true){
 			AddMsg("US002");
 			unset($_POST);
@@ -42,7 +42,7 @@ if(isset($_POST["SaveInfoUser"])){
 	}
 }
 	if(isset($_POST["SaveContactUser"])){
-		$result = $users->UserUpdateContact($_POST["phone"], $_POST["mail"], $_POST["adress"],$_POST["discord"]);
+		$result = $users->UserUpdateContact($_POST["phone"], $_POST["mail"], $_POST["adress"], (isset($_POST["discord"])?$_POST["discord"]:""));
 		if($result === true){
 			AddMsg("US003");
 			unset($_POST);
@@ -51,7 +51,7 @@ if(isset($_POST["SaveInfoUser"])){
 		}
 	}
 	if(isset($_POST["SaveGameUser"])){
-		$result = $users->UserUpdateGame($_POST["rank"], $_POST["guns"]);
+		$result = $users->UserUpdateGame((isset($_POST["rank"])?$_POST["rank"]:""), (isset($_POST["guns"])?$_POST["guns"]:""));
 		if($result === true){
 			AddMsg("US004");
 			unset($_POST);
@@ -82,12 +82,22 @@ if(isset($_POST["SaveInfoUser"])){
 		unset($_POST["SaveGroupsUser"]);
 		$result = $users->UserUpdateGroups($_POST["ranks"]);
 		if($result === true){
-			$_SESSION["msg"] = $system->GetMessage("US004");
+			$_SESSION["msg"] = $system->GetMessage("US007");
 			unset($_POST);
 		} else {
-			echo $system->GetMessage("US206");
+			echo $system->GetMessage("US208");
 		}
 	}
+    if(isset($_POST["SaveTagsUser"])){
+        unset($_POST["SaveTagsUser"]);
+        $result = $users->UserUpdateTags($_POST["tags"]);
+        if($result === true){
+            $_SESSION["msg"] = $system->GetMessage("US008");
+            unset($_POST);
+        } else {
+            echo $system->GetMessage("US209");
+        }
+    }
 $UserInfo = $users->InfoUser();
 if($UserInfo === false && isset($_GET["id"])){
 	echo'<meta http-equiv="refresh" content="0;url=?page=users"> ';
@@ -427,8 +437,47 @@ if($type == 0){
 		</form>
 	</div>
 	<?php
-	} 
-
 	}
+    if(in_array("tag_reassignment",$LoginPermission) || $modules->VerifyModule("TAG") == 0){
+            ?>
+            <div class="space-y-6 container mx-auto px-4 py-5 ">
+                <form method="post" action="">
+                    <h1 class="text-xl text-[<?=$system->SystemSettings["color_2"]?>] font-bold">Tagy</h1>
+                    <div class="pl-3 space-y-4">
+                        <div class="relative flex w-full">
+                            <?php
+                            $tags = new Tags();
+
+                            $tagslist = $tags->GetTag();
+
+                            if($tagslist !== false){
+                                echo '<select id="tag" name="tags[]" class=" block w-full flex-1 rounded-md text-['.$system->SystemSettings["input_color"].'] bg-['.$system->SystemSettings["input_bg"].'] p-2 sm:text-sm" required multiple>';
+
+                                foreach($tagslist as $tagInfo){
+                                    $add="";
+                                    $utags = $users->UserTags();
+                                    if($utags != false && in_array($tagInfo["Tag_ID"],$utags)){
+                                        $add="selected";
+                                    }
+                                    echo '<option value="'.$tagInfo["Tag_ID"].'" '.$add.'>'.$tagInfo["Tag_Name"].'</option>';
+                                }
+                                echo '</select>';
+                            } else {
+                                echo $system->GetMessage("RA200");
+                            }
+
+
+                            ?>
+                        </div>
+                        <label class="block text-sm text-[<?=$system->SystemSettings["color_3"]?>]">Můžete vybrat pomocí <?=$click?> + kliknutí na skupinu. Tímto způsobem můžete vybrat víc skupin.</label>
+                    </div>
+                    <div class="px-4 py-3 text-right sm:px-6">
+                        <button type="submit" name="SaveTagsUser" class="justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium shadow-sm bg-[<?=$system->SystemSettings["button_bg"]?>]  text-[<?=$system->SystemSettings["button_color"]?>] align-middle inline-block rounded-md p-3 hover:text-[<?=$system->SystemSettings["button_color:hover"]?>] hover:bg-[<?=$system->SystemSettings["button_bg:hover"]?>] hover:cursor-pointer"><ion-icon name="save" class="inline-block align-middle"></ion-icon>  <?=constant("SAVE");?></button>
+                    </div>
+                </form>
+            </div>
+            <?php
+        }
+    }
 	?>
 </div>

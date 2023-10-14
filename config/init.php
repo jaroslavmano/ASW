@@ -51,8 +51,13 @@ if( file_exists("./inc/php/class/")){
     require_once("./inc/php/class/system.php");
     require_once("./inc/php/class/ranks.php");
 
+    // PŘÍDAVNÉ MODULY
+    require_once("./inc/php/class/tags.php");
+    require_once("./inc/php/class/games.php");
+
 // VYTVOŘENÍ LOGOVOÁNÍ
     $log = new Log();
+    $modules = new Module();
 
     $system = new system_class();
     $system->GetSettings();

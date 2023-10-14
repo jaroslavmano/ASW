@@ -14,7 +14,7 @@ if(isset($_POST["SaveInfoGroup"])){
 			$_SESSION["msg"] = $system->GetMessage("SG001");
 			unset($_POST);
 			$groups = new Groups($_GET["id"]);
-			echo'<meta http-equiv="refresh" content="0;url=?page=group&id='.$result.'&msg=1"> ';
+			//echo'<meta http-equiv="refresh" content="0;url=?page=group&id='.$_GET["id"].'&msg=1"> ';
 		} else {
 			echo $system->GetMessage("SG203");
 		}

@@ -69,6 +69,22 @@ $ranks = $ranksClass->Get();
 									<div class="col-span-2 text-left">
 										<h1 class="md:text-2xl sm:text-xl text-[<?=$system->SystemSettings["color_1"]?>]"><?=$userInfo[0]["User_Username"]?> | <?=$userInfo[0]["User_ID"]?></h1>
 										<p class="md:text-xl sm:text-lg text-[<?=$system->SystemSettings["color_3"]?>]">(<?=$userInfo[0]["User_Name"]?>)</p>
+                                        <p>
+                                            <?php
+                                            if(in_array("tag_display",$LoginPermission) && $modules->VerifyModule("TAG") == 1){
+                                                echo '<section class="mt-5 mb-5 leading-8">';
+                                                $tags = $userCLS->UserTags();
+                                                if(!empty($tags)){
+                                                    foreach ($tags as $tag){
+                                                        $tagClass = new Tags($tag);
+                                                        $tagInfo = $tagClass->Info();
+                                                        echo '<span class="bg-['.$tagInfo["Tag_Color"].'] text-['.$tagInfo["Tag_TextColor"].'] text-base font-medium mr-2 px-2.5 py-0.5 whitespace-nowrap rounded">('.$tagInfo["Tag_Short"].')</span>';
+                                                    }
+                                                }
+                                                echo '</section>';
+                                            }
+                                            ?>
+                                        </p>
 									</div>
 									<div> 
 										<a href="?page=profile&id=<?=$userInfo[0]["User_ID"]?>" class="justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium shadow-sm bg-[<?=$system->SystemSettings["button_bg"]?>]  text-[<?=$system->SystemSettings["button_color"]?>] align-middle inline-block rounded-md p-3 hover:text-[<?=$system->SystemSettings["button_color:hover"]?>] hover:bg-[<?=$system->SystemSettings["button_bg:hover"]?>] hover:cursor-pointer"><ion-icon name="search-outline" class="inline-block align-middle"></ion-icon>  Zobrazit</a>
@@ -84,14 +100,6 @@ $ranks = $ranksClass->Get();
 					?>
 				</div>
 			</div>
-				
-		   					<?php
-                /*<section class="mt-5 mb-5 leading-8 text-center">
-		  							<span class="bg-blue-100 text-blue-800 text-base space-y-0.5 font-medium m-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Zdravotník</span>
-									<span class="bg-gray-100 text-gray-800 text-base font-medium space-y-0.5 m-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Střelec</span>
-									<span class="bg-red-100 text-red-800 text-base font-medium m-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Rekrut</span>
-		  						</section> */
-                ?>
 
 			<?php
 			}

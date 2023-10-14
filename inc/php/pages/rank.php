@@ -14,7 +14,7 @@ if(isset($_POST["SaveInfoGroup"])){
 			$_SESSION["msg"] = $system->GetMessage("RA002");
 			unset($_POST);
 			$ranks = new Ranks($_GET["id"]);
-			echo'<meta http-equiv="refresh" content="0;url=?page=rank&id='.$result.'&msg=1"> ';
+			//echo'<meta http-equiv="refresh" content="0;url=?page=rank&id='.$result.'&msg=1"> ';
 		} else {
 			echo $system->GetMessage("RA202");
 		}
@@ -105,7 +105,7 @@ if(isset($_GET["id"])){
 				</div>
 				<div class="grid grid-cols-1 gap-6">
 					<div class="col-span-3 sm:col-span-2">
-						<label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("NAME");?>:</label>
+						<label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("SHORT");?>:</label>
 						<div class="mt-1 flex rounded-md shadow-sm">
 							<input type="text" name="short" maxlength="4" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="ASW" <?=($type == 1)? "value='".$rankInfo[0]["Rank_Short"]."'":"" ?> required />
 						</div>

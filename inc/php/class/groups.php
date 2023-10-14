@@ -68,12 +68,14 @@ class Groups{
 			$groupPerm = new Permissions();
 			$perms = $groupPerm->DecodeCodePremission($db->QueryData[0]["Group_Permissions"]);
 			//print_r($perms);
-			
-			foreach($perms as $perm){
-				//echo $perm. " ";
-				$permData = $groupPerm->GetPermission($perm);
-				$permissions[] = $permData[0]["Permission_Index"];
-			}
+
+
+            if(!empty($perms) && $perms[0] >= 0){
+                foreach($perms as $perm){
+                    $permData = $groupPerm->GetPermission($perm);
+                    $permissions[] = $permData[0]["Permission_Index"];
+                }
+            }
 			return $permissions;
 		}
 		

@@ -45,6 +45,28 @@ if(!empty($_GET["type"])){
 			}
 			echo'<meta http-equiv="refresh" content="0;url=?page=ranks"> ';
 			break;
+        case "tag":
+            if(in_array("tag_manage",$LoginPermission)){
+                $r = new Tags($_GET["id"]);
+                if($r->Remove()){
+                    $_SESSION["msg"] = $system->GetMessage("TAG003");
+                } else {
+                    $_SESSION["msg"] = $system->GetMessage("TAG203");
+                }
+            }
+            echo'<meta http-equiv="refresh" content="0;url=?page=tags"> ';
+            break;
+        case "game":
+            if(in_array("gam_remove",$LoginPermission)){
+                $r = new Games($_GET["id"]);
+                if($r->Remove()){
+                    $_SESSION["msg"] = $system->GetMessage("GAM003");
+                } else {
+                    $_SESSION["msg"] = $system->GetMessage("GAM203");
+                }
+            }
+            echo'<meta http-equiv="refresh" content="0;url=?page=games"> ';
+            break;
 	}
 } else {
 	echo'<meta http-equiv="refresh" content="0;url=?page=main"> ';

@@ -4,7 +4,7 @@ class User{
 	public $UserData;
 	private $DiscordID;
 	
-	public function __construct($id = null, $discordID = null){
+	public function __construct($id = "", $discordID = ""){
 		if(!empty($id)){
 			$this->id = $id;
 		}
@@ -74,6 +74,23 @@ class User{
 			return false;
 		}
 	}
+
+    public function UserTags(){
+        global $db;
+        $params = array(array("code"=>":id","value"=>$this->id));
+        $sqlSelect = $db->Query("SELECT UT_TagID FROM ".constant("db_prefix")."module_usertags WHERE UT_UserID = :id",$params);
+
+        if($sqlSelect){
+            $tags = array();
+            //print_r($db->QueryData);
+            foreach($db->QueryData as $tag){
+                $tags[] = $tag["UT_TagID"];
+            }
+            return $tags;
+        } else {
+            return false;
+        }
+    }
 	public function CreateUser($name,$username, $bday, $userID){
 		global $db;
 		
@@ -94,6 +111,11 @@ class User{
 		} else {
 			$display_bday = 0;
 		}
+
+        if(empty($username)){
+            $info = $this->InfoUser();
+            $username = $info[0]["User_Username"];
+        }
 		
 		$params = array(array("code"=>":name","value"=>$name),array("code"=>":user","value"=>$username),array("code"=>":dbday","value"=>$display_bday),array("code"=>":bday","value"=>strtotime($bday)),array("code"=>":alergy","value"=>$alergy),array("code"=>":id","value"=>$this->id));
 		$sqlSelect = $db->Query("UPDATE ".constant("db_prefix")."users SET User_Name=:name,User_Username=:user,User_DisplayBDay=:dbday, User_BirthDate=:bday,User_Allergies= :alergy WHERE User_ID = :id",$params);
@@ -106,6 +128,11 @@ class User{
 	}
 	public function UserUpdateContact($phone, $mail, $adress, $discord){
 		global $db;
+
+        if(empty($discord)){
+            $info = $this->InfoUser();
+            $discord = $info[0]["User_DiscordID"];
+        }
 		
 		$params = array(array("code"=>":phone","value"=>$phone),array("code"=>":mail","value"=>$mail),array("code"=>":adress","value"=>$adress),array("code"=>":discord","value"=>$discord),array("code"=>":id","value"=>$this->id));
 		$sqlSelect = $db->Query("UPDATE ".constant("db_prefix")."users SET User_Phone=:phone,User_Mail=:mail,User_Adress=:adress,User_DiscordID= :discord WHERE User_ID = :id",$params);
@@ -118,7 +145,12 @@ class User{
 	}
 	public function UserUpdateGame($rank, $guns){
 		global $db;
-		
+
+        if(empty($rank)){
+            $info = $this->InfoUser();
+            $rank = $info[0]["User_RankID"];
+        }
+
 		$params = array(array("code"=>":rank","value"=>$rank), array("code"=>":guns","value"=>$guns), array("code"=>":id","value"=>$this->id));
 		$sqlSelect = $db->Query("UPDATE ".constant("db_prefix")."users SET User_RankID=:rank,User_Guns=:guns WHERE User_ID = :id",$params);
 		
@@ -151,6 +183,29 @@ class User{
 			return false;
 		}
 	}
+    public function UserUpdateTags($tags){
+        global $db;
+        $return = 0;
+        $params = array(array("code"=>":id","value"=>$this->id));
+        $sqlSelect = $db->Query("DELETE FROM ".constant("db_prefix")."module_usertags WHERE UT_UserID = :id",$params);
+
+        if($sqlSelect){
+            foreach($tags as $tag){
+                $params = array(array("code"=>":userID","value"=>$this->id),array("code"=>":tagID","value"=>$tag));
+                $sqlSelect = $db->Query("INSERT INTO ".constant("db_prefix")."module_usertags (UT_UserID, UT_TagID) VALUES (:userID,:tagID)",$params);
+                if(!$sqlSelect){
+                    $return++;
+                }
+            }
+            if($return == 0){
+                return true;
+            } else{
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 	public function UserUpdatePicture($picture){
 		global $db;
 		

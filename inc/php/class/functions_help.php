@@ -3,6 +3,7 @@
 // NASTAVOVÁNÍ STRÁNEK
 function IncludePage($page = null, $module = false, $save=false) {
 	global $system;
+    global $modules;
 	global $log;
 	global $loginUser;
 	global $LoginPermission;

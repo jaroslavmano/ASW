@@ -3,8 +3,9 @@
 if(isset($_GET["discordID"]) || isset($_SESSION["ID"])){
 	if(isset($_GET["discordID"])){
 		$loginUser = new User('',$_GET["discordID"]);
-		if($loginUser->InfoUser() === false){
-			echo '<meta http-equiv="refresh" content="0;url=login.php">';
+		if($loginUser->InfoUser() == false){
+            echo "Neplatné";
+			//echo '<meta http-equiv="refresh" content="0;url=login.php">';
 		}
 		$_SESSION["ID"] = $loginUser->id; 
 	}
