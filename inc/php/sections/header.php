@@ -6,7 +6,7 @@
         </a>
       </div>
       <div class="hidden lg:flex text-4xl text-[<?=$system->SystemSettings["main_panel_color"]?>]">
-        <a id="time "><?=date("H:i:s")?></a>
+        <a id="time"><?=date("H:i:s")?></a>
       </div>
       <div class="flex flex-1 justify-end gap-x-8 p-1">
         <a href="?page=profile" class="text-lg text-[<?=$system->SystemSettings["main_panel_color"]?>] font-semibold leading-6 hover:text-[<?=$system->SystemSettings["main_panel_color:hover"]?>]"><span class="hidden md:inline"><?=$loginUser->UserData[0]["User_Name"]?></span> <ion-icon name="person-circle" class="inline-block align-middle text-xl"></ion-icon></a>
@@ -88,6 +88,7 @@
 		var t_str = hours + ":" + minutes + ":" + sec;
 		document.getElementById('time').innerHTML = t_str;
 	}
+    
 	setInterval(updateTime, 1000);
 		const button = document.querySelector('#menu-button'); // Hamburger Icon
 const menu = document.querySelector('#mobile-menu'); // Menu
