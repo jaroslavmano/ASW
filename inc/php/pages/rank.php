@@ -33,7 +33,7 @@ if(isset($_POST["SaveInfoGroup"])){
 }
 $rankInfo = $ranks->Info();
 if($rankInfo === false && isset($_GET["id"])){
-	//echo'<meta http-equiv="refresh" content="0;url=?page=ranks"> ';
+	echo'<meta http-equiv="refresh" content="0;url=?page=ranks"> ';
 }
 if(isset($_GET["id"])){
 	$type =1;

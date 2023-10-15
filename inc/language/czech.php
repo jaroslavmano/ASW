@@ -21,6 +21,7 @@ define("ATTEND","ÚČAST");
 define("LASTEDIT","POSLEDNÍ ÚPRAVA");
 define("STATUS","STAV");
 define("EVENTS","AKCE");
+define("RATING","OHODNOTIT");
 
 define("DATE","DATUM");
 define("USER","UŽIVATEL");

@@ -64,7 +64,7 @@ $attendance = $gamesClass->GetAttendance();
 <h1 class="text-center text-4xl text-[<?=$system->SystemSettings["color_2"]?>] font-bold mt-6 mb-6"><?=constant("ATTEND");?> | <?=$info["Game_Name"]?> <small>(<?=date("d.m.Y",$info["Game_Date"])?>)</small></h1>
 <hr class="w-[10%] mx-auto ">
 <div class="text-center p-4">
-<a href="?pages=games" class="text-[<?=$system->SystemSettings["link_color"]?>] hover:text-[<?=$system->SystemSettings["link_color:hover"]?>]"><ion-icon name="chevron-back" class="inline-block align-middle text-xl"></ion-icon> <?=constant("BACK");?></a>
+<a href="?page=games" class="text-[<?=$system->SystemSettings["link_color"]?>] hover:text-[<?=$system->SystemSettings["link_color:hover"]?>]"><ion-icon name="chevron-back" class="inline-block align-middle text-xl"></ion-icon> <?=constant("BACK");?></a>
 </div>
 
 <?php

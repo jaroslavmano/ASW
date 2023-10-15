@@ -54,6 +54,7 @@ if( file_exists("./inc/php/class/")){
     // PŘÍDAVNÉ MODULY
     require_once("./inc/php/class/tags.php");
     require_once("./inc/php/class/games.php");
+    require_once("./inc/php/class/stats.php");
 
 // VYTVOŘENÍ LOGOVOÁNÍ
     $log = new Log();

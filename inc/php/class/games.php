@@ -275,6 +275,47 @@ class Games
             return false;
         }
     }
+    public function ControllAttendanceComplete($userID, $gameID)
+    {
+        global $db;
+
+        $params = array(array("code" => ":user", "value" => $userID), array("code" => ":game", "value" => $gameID));
+        $sqlSelect = $db->Query("SELECT GA_Answer FROM " . constant("db_prefix") . "module_gameattendance WHERE GA_UserID = :user AND GA_GameID = :game AND GA_Answer = 1 AND GA_Status = 1  LIMIT 1", $params);
+
+        if ($sqlSelect) {
+            return $db->QueryData[0];
+
+        } else {
+            return false;
+        }
+    }
+
+    public function UserAttandace($userID, $type)
+    {
+        global $db;
+
+        if($type == "a"){
+            $answare = 1;
+            $status = 1;
+        } else {
+            $answare = 2;
+            $status = 0;
+        }
+
+        $params = array(
+            array("code" => ":user", "value" => $userID),
+            array("code" => ":status", "value" => $status),
+            array("code" => ":answare", "value" => $answare)
+        );
+        $sqlSelect = $db->Query("SELECT COUNT(*) FROM " . constant("db_prefix") . "module_gameattendance WHERE GA_UserID = :user AND GA_Answer = :answare AND GA_Status = :status
+        ", $params);
+
+        if ($sqlSelect) {
+            return $db->QueryData[0];
+        } else {
+            return false;
+        }
+    }
 
     public function RemoveAttendance($userID, $gameID)
     {

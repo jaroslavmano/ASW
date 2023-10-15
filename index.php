@@ -47,6 +47,63 @@ if(isset($_GET["discordID"]) || isset($_SESSION["ID"])){
 	  </script>
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        .hodnoceni {
+            display: block;
+        }
+
+        .hodnoceni input {
+            display: none;
+        }
+
+        .hodnoceni label {
+            font-size: 50px;
+            cursor: pointer;
+            color: <?=$system->SystemSettings["star_color"]?>;
+        }
+
+        .hodnoceni label:before {
+            content: "\2606"; /* Plná hvězda */
+        }
+
+        .hodnoceni input:checked ~ label:before {
+            content: "\2605"; /* Prázdná hvězda */
+
+        }
+        .custom-radio {
+            display: inline-block;
+            cursor: pointer;
+
+            position: relative;
+            padding-left: 30px;
+            margin-right: 10px;
+        }
+
+        .custom-radio input {
+            display: none;
+        }
+
+        .custom-radio label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 25px;
+            height: 25px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            background-color: <?=$system->SystemSettings["radio_check"]?>;
+            cursor: pointer;
+        }
+
+        .custom-radio input:checked + label::after {
+            content: "\2713";
+            display: block;
+            text-align: center;
+            line-height: 25px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body class="bg-[<?=$system->SystemSettings["bg_page"]?>] font-mono ">
 

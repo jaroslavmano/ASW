@@ -86,13 +86,14 @@ if(!isset($_GET["id"])){
 		  </div>
 		  <?php
           if(in_array("tag_display",$LoginPermission) && $modules->VerifyModule("TAG") == 1){
-                echo '<section class="mt-5 mb-5 leading-8">';
+                echo '<section class="mt-5 mb-5 ">';
                     $tags = $user->UserTags();
                     if(!empty($tags)){
                         foreach ($tags as $tag){
                             $tagClass = new Tags($tag);
                             $tagInfo = $tagClass->Info();
-                            echo '<span class="bg-['.$tagInfo["Tag_Color"].'] text-['.$tagInfo["Tag_TextColor"].'] text-base font-medium mr-2 px-2.5 py-0.5 whitespace-nowrap rounded">'.$tagInfo["Tag_Name"].' ('.$tagInfo["Tag_Short"].')</span>';
+                            echo '
+                             <p class="bg-['.$tagInfo["Tag_Color"].'] text-['.$tagInfo["Tag_TextColor"].'] text-base font-medium mr-2 px-2.5 py-0.5 text-center my-1 rounded">'.$tagInfo["Tag_Name"].' ('.$tagInfo["Tag_Short"].')</p>';
                         }
                     }
                 echo '</section>';
@@ -118,7 +119,15 @@ if(!isset($_GET["id"])){
 	if((!isset($_GET["id"]) || $type) || in_array("users_display_game",$LoginPermission)){ 
 	?>
       <a href="<?=$basicURL?>&section=game" class="<?=((isset($_GET["section"]) && ($_GET["section"] == "game"))?$activeClass:$normalClass)?> <?=$hoverClass?> block px-3 py-2 rounded-md text-base font-medium"><ion-icon name="game-controller" class="inline-block align-middle"></ion-icon> Herní Informace</a>
-	<?php } ?>
+	<?php }
+    if($modules->VerifyModule("STA") == 1){
+
+    if(($type && in_array("stats_profil",$LoginPermission)) || ($type === false && in_array("stats_players",$LoginPermission))){
+        ?>
+        <a href="<?=$basicURL?>&section=stats" class="<?=((isset($_GET["section"]) && ($_GET["section"] == "stats"))?$activeClass:$normalClass)?> <?=$hoverClass?> block px-3 py-2 rounded-md text-base font-medium"><ion-icon name="stats-chart" class="inline-block align-middle"></ion-icon> Statistiky</a>
+    <?php }
+    }
+    ?>
 		 
     </div>
       </div>
@@ -219,7 +228,42 @@ if(!isset($_GET["id"])){
             </div>
           </div>
 			<?php }
-			?>
+            if((isset($_GET["section"]) && $_GET["section"] == "stats") && $modules->VerifyModule("STA") == 1 && (($type && in_array("stats_profil",$LoginPermission)) || ($type === false && in_array("stats_players",$LoginPermission)))){
+               $stats = new Stats("", $userInfo[0]["User_ID"]);
+               $statistic =  $stats->GetStatsNanAAll("user");
+               $game = new Games();
+               $accept = $game->UserAttandace($userInfo[0]["User_ID"],"a")[0];
+               $declime = $game->UserAttandace($userInfo[0]["User_ID"],"b");
+
+                ?>
+                <div class="space-y-6 bg-[<?=$system->SystemSettings["profile_bg"]?>] px-4 py-5 sm:p-6">
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="col-span-3 sm:col-span-2">
+                            <label for="username" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Průměr zabití:</label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="int" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" value="<?=$statistic["k"]?>" readonly disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="col-span-3 sm:col-span-2">
+                            <label for="username" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Průměr úmrtí:</label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="int" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" value="<?=$statistic["d"]?>" readonly disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="col-span-3 sm:col-span-2">
+                            <label for="username" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Potvrzená účast na akcích:</label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="int" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" value="<?=$accept?>" readonly disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php }
+            ?>
         </div>
 
     </div>
