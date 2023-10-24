@@ -61,7 +61,7 @@ $ranks = $ranksClass->Get();
         <thead class="text-xs text-[<?=$system->SystemSettings["table_head_color"]?>] uppercase bg-[<?=$system->SystemSettings["table_head_bg"]?>]">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    <?=constant("ID");?>
+                   Priorita
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <?=constant("NAME");?>
@@ -83,7 +83,7 @@ $ranks = $ranksClass->Get();
 			?>
             <tr class="bg-[<?=$system->SystemSettings["table_body_bg"]?>] text-[<?=$system->SystemSettings["table_body_color"]?>] border-b border-[<?=$system->SystemSettings["table_body_border"]?>]">
                 <td class="px-6 py-4">
-                    <?=$rank["Rank_ID"]?>
+                    <?=$rank["Rank_Priority"]?>
                 </td>
                 <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
                      <?=$rank["Rank_Name"]?>

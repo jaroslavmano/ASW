@@ -32,12 +32,12 @@ if(isset($_POST["SaveInfoUser"])){
 	} else {
 		$result = $users->CreateUser($_POST["name"], $_POST["username"], $_POST["date"], $_POST["id"]);
 		
-		if($result !== false && isset($result)){
+		if(isset($result) && $result !== false){
 			$_SESSION["msg"] .= $system->GetMessage("US001");
 			echo'<meta http-equiv="refresh" content="0;url=?page=user&status=edit&id='.$_POST["id"].'&msg=1"> ';
 			//header("Refresh:0; url=?page=group&id=".$result);
 		} else {
-			AddMsg("SG204");
+			AddMsg("US204");
 		}
 	}
 }
@@ -80,7 +80,7 @@ if(isset($_POST["SaveInfoUser"])){
 	}
 	if(isset($_POST["SaveGroupsUser"])){
 		unset($_POST["SaveGroupsUser"]);
-		$result = $users->UserUpdateGroups($_POST["ranks"]);
+		$result = $users->UserUpdateGroups($_POST["groups"]);
 		if($result === true){
 			$_SESSION["msg"] = $system->GetMessage("US007");
 			unset($_POST);
@@ -328,7 +328,7 @@ if($type == 0){
 			<div class="pl-3 space-y-4">
 				<div class="grid grid-cols-1 gap-6">
 					<div class="col-span-3 sm:col-span-2">
-						<label for="guns" class="block text-sm font-medium text-white">Rank:</label>
+						<label for="rank" class="block text-sm font-medium text-white">Rank:</label>
 						<div class="flex justify-center mt-2 mb-2">
 								<?php
 									$ranks = new Ranks();
@@ -406,17 +406,18 @@ if($type == 0){
 			<h1 class="text-xl text-[<?=$system->SystemSettings["color_2"]?>] font-bold">Skupiny</h1>
 			<div class="pl-3 space-y-4">
 			  	<div class="relative flex w-full">
-								<?php
-									$groups = new Groups();
+                    <?php
+                    $groups = new Groups();
 									
-									$groupslist = $groups->GetGroups();
-									
-									if($groupslist !== false){
-										echo '<select id="rank" name="ranks[]" class=" block w-full flex-1 rounded-md text-['.$system->SystemSettings["input_color"].'] bg-['.$system->SystemSettings["input_bg"].'] p-2 sm:text-sm" required multiple>';
-										
-										foreach($groupslist as $groupInfo){
+                    $groupslist = $groups->GetGroups();
+                    if($groupslist !== false){
+
+
+                        echo '<select id="group" name="groups[]" class=" block w-full flex-1 rounded-md text-['.$system->SystemSettings["input_color"].'] bg-['.$system->SystemSettings["input_bg"].'] p-2 sm:text-sm" required multiple>';
+									foreach($groupslist as $groupInfo){
+
 											$add="";
-											if(in_array($groupInfo["Group_ID"],$users->UserGroups())){
+											if(!empty($users->UserGroups()) && in_array($groupInfo["Group_ID"],$users->UserGroups())){
 												$add="selected";
 											}
 											echo '<option value="'.$groupInfo["Group_ID"].'" '.$add.'>'.$groupInfo["Group_Name"].'</option>';
@@ -425,8 +426,6 @@ if($type == 0){
 									} else {
 										echo $system->GetMessage("RA200");
 									}
-									
-					
 								?>
 			  	</div>
 				<label class="block text-sm text-[<?=$system->SystemSettings["color_3"]?>]">Můžete vybrat pomocí <?=$click?> + kliknutí na skupinu. Tímto způsobem můžete vybrat víc skupin.</label>
@@ -438,7 +437,7 @@ if($type == 0){
 	</div>
 	<?php
 	}
-    if(in_array("tag_reassignment",$LoginPermission) || $modules->VerifyModule("TAG") == 0){
+    if(in_array("tag_reassignment",$LoginPermission) && $modules->VerifyModule("TAG") == 1){
             ?>
             <div class="space-y-6 container mx-auto px-4 py-5 ">
                 <form method="post" action="">

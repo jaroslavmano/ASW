@@ -71,26 +71,7 @@ class Games
         }
     }
 
-    public function Create($game, $date, $limi, $location, $tickets)
-    {
-        global $db;
-
-        $params = array(
-            array("code" => ":game", "value" => $game),
-            array("code" => ":date", "value" => $date),
-            array("code" => ":limit", "value" => $limi),
-            array("code" => ":loc", "value" => $location),
-            array("code" => ":tick", "value" => $tickets));
-        $sqlSelect = $db->Query("INSERT INTO " . constant("db_prefix") . "module_games (Game_Name, Game_Date,Game_Limits,Game_Location,Game_Tickets) VALUES(:game, :date,:limit,:loc,:tick);", $params);
-
-        if ($sqlSelect) {
-            return $db->LastID;
-        } else {
-            return false;
-        }
-    }
-
-    public function Update($game, $date, $limi, $location, $tickets)
+    public function Create($game, $date, $limi, $location, $tickets,$web, $descript)
     {
         global $db;
 
@@ -100,8 +81,43 @@ class Games
             array("code" => ":limit", "value" => $limi),
             array("code" => ":loc", "value" => $location),
             array("code" => ":tick", "value" => $tickets),
+            array("code" => ":web", "value" => $web),
+            array("code" => ":descript", "value" => $descript),
+        );
+        $sqlSelect = $db->Query("INSERT INTO " . constant("db_prefix") . "module_games 
+        (Game_Name, Game_Date,Game_Limits,Game_Location,Game_Tickets, Game_Web,Game_Descript) 
+        VALUES
+        (:game, :date,:limit,:loc,:tick, :web,:descript);", $params);
+
+        if ($sqlSelect) {
+            return $db->LastID;
+        } else {
+            return false;
+        }
+    }
+
+    public function Update($game, $date, $limi, $location, $tickets, $web, $descript)
+    {
+        global $db;
+
+        $params = array(
+            array("code" => ":game", "value" => $game),
+            array("code" => ":date", "value" => $date),
+            array("code" => ":limit", "value" => $limi),
+            array("code" => ":loc", "value" => $location),
+            array("code" => ":tick", "value" => $tickets),
+            array("code" => ":web", "value" => $web),
+            array("code" => ":descript", "value" => $descript),
             array("code" => ":id", "value" => $this->id));
-        $sqlSelect = $db->Query("UPDATE " . constant("db_prefix") . "module_games SET Game_Name=:game,Game_Date=:date,Game_Limits=:limit,Game_Location=:loc,Game_Tickets=:tick WHERE Game_ID = :id", $params);
+        $sqlSelect = $db->Query("UPDATE " . constant("db_prefix") . "module_games SET 
+        Game_Name=:game,
+        Game_Date=:date,
+        Game_Limits=:limit,
+        Game_Location=:loc,
+        Game_Tickets=:tick,
+        Game_Web=:web,
+        Game_Descript=:descript 
+         WHERE Game_ID = :id", $params);
 
         if ($sqlSelect) {
             return true;

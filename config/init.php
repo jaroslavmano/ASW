@@ -8,6 +8,8 @@ $nowPath = $_SERVER["DOCUMENT_ROOT"];
 
 define("db_prefix","asw_");
 define('web_url', "https://asware.local/");
+define('pathToDir', "");
+
 
 
 

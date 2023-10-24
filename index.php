@@ -1,5 +1,8 @@
 <?php require("./config/init.php"); ?>
 <?php
+ini_set('display_errors',"1");
+ini_set('display_stratup_errors',"1");
+
 if(isset($_GET["discordID"]) || isset($_SESSION["ID"])){
 	if(isset($_GET["discordID"])){
 		$loginUser = new User('',$_GET["discordID"]);
@@ -48,6 +51,8 @@ if(isset($_GET["discordID"]) || isset($_SESSION["ID"])){
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+
     <style>
         .hodnoceni {
             display: block;

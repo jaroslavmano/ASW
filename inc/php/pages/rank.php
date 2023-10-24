@@ -9,7 +9,7 @@
     }
 if(isset($_POST["SaveInfoGroup"])){
 	if(isset($_GET["id"])){
-		$result = $ranks->Update($_POST["name"],$_POST["short"], $_POST["descript"]);
+		$result = $ranks->Update($_POST["name"],$_POST["short"], $_POST["descript"], $_POST["priority"]);
 		if($result === true){
 			$_SESSION["msg"] = $system->GetMessage("RA002");
 			unset($_POST);
@@ -20,7 +20,7 @@ if(isset($_POST["SaveInfoGroup"])){
 		}
 	} else {
 		echo $type;
-		$result = $ranks->Create($_POST["name"],$_POST["short"], $_POST["descript"]);
+		$result = $ranks->Create($_POST["name"],$_POST["short"], $_POST["descript"], $_POST["priority"]);
 		
 		if($result !== false && isset($result)){
 			$_SESSION["msg"] = $system->GetMessage("RA001");
@@ -108,6 +108,14 @@ if(isset($_GET["id"])){
 						<label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("SHORT");?>:</label>
 						<div class="mt-1 flex rounded-md shadow-sm">
 							<input type="text" name="short" maxlength="4" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="ASW" <?=($type == 1)? "value='".$rankInfo[0]["Rank_Short"]."'":"" ?> required />
+						</div>
+					</div>
+				</div>
+				<div class="grid grid-cols-1 gap-6">
+					<div class="col-span-3 sm:col-span-2">
+						<label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Priorita:</label>
+						<div class="mt-1 flex rounded-md shadow-sm">
+							<input type="number" name="priority" maxlength="4" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="0" <?=($type == 1)? "value='".$rankInfo[0]["Rank_Priority"]."'":"" ?> required />
 						</div>
 					</div>
 				</div>

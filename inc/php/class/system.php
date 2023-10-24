@@ -49,16 +49,15 @@ class system_class{
 				$File_Check = getimagesize($_FILES[$key]["tmp_name"]);
 				$File_Size = $_FILES[$key]["size"];
 				$File_Temp = $_FILES[$key]["tmp_name"];
-				$target_dir = "/domains/demo.asware.eu/inc/data/system/";
-				$target_dir2 = "inc/data/system/";
+				$target_dir = "/inc/data/system/";
 
 				$returnPicture = ControlFile($File_Name, $File_Check, $target_dir, $File_Size, $File_Temp);
 				
 				if($returnPicture === true){
 					if(isset($this->SystemSettings[$key])){
-						unlink($_SERVER["DOCUMENT_ROOT"]."/domains/demo.asware.eu/".$this->SystemSettings[$key]);
+						unlink("./".$this->SystemSettings[$key]);
 					}
-					$sqlSelect = $db->Query("UPDATE ".constant("db_prefix")."system SET System_Value= '".$target_dir2.$File_Name."' WHERE System_ID = '".$key."'");
+					$sqlSelect = $db->Query("UPDATE ".constant("db_prefix")."system SET System_Value= '".$target_dir.$File_Name."' WHERE System_ID = '".$key."'");
 
 					if($sqlSelect !== true){
 						$return[$key] = false;

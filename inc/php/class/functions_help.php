@@ -39,7 +39,7 @@ function ControlFile($fileName, $fileCheck, $filePath, $fileSize, $File_Temp){
 	global $nowPath;
 	
 		$ControlUpload = 1;
-		$target_file = $nowPath. $filePath  .  $fileName;
+		$target_file = $nowPath.constant("pathToDir"). $filePath  .  $fileName;
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 		$errMSG = array();
 
@@ -59,7 +59,15 @@ function ControlFile($fileName, $fileCheck, $filePath, $fileSize, $File_Temp){
 		}
 
 		// Allow certain file formats
-		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif"&& $imageFileType != "mp4" && $imageFileType != "mov" && $imageFileType != "wav") {
+		if($imageFileType != "jpg" &&
+            $imageFileType != "png" &&
+            $imageFileType != "jpeg" &&
+            $imageFileType != "gif"&&
+            $imageFileType != "mp4" &&
+            $imageFileType != "mov" &&
+            $imageFileType != "wav" &&
+            $imageFileType != "ico"
+        ) {
 			AddMsg("SY209");
 			$ControlUpload = 0;
 		}

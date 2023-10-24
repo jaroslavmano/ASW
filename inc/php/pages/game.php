@@ -20,7 +20,7 @@
 
 if(isset($_POST["SaveIGame"])){
 	if(isset($_GET["id"])){
-		$result = $game->Update($_POST["game"],strtotime($_POST["date"]),$_POST["limits"],$_POST["location"],$_POST["tickets"]);
+		$result = $game->Update($_POST["game"],strtotime($_POST["date"]),$_POST["limits"],$_POST["location"],$_POST["tickets"],$_POST["web"],$_POST["descript"]);
 		if($result === true){
 			$_SESSION["msg"] = $system->GetMessage("GAM002");
 			unset($_POST);
@@ -31,7 +31,7 @@ if(isset($_POST["SaveIGame"])){
 		}
 	} else {
 		echo $type;
-		$result = $game->Create($_POST["game"],strtotime($_POST["date"]),$_POST["limits"],$_POST["location"],$_POST["tickets"]);
+		$result = $game->Create($_POST["game"],strtotime($_POST["date"]),$_POST["limits"],$_POST["location"],$_POST["tickets"],$_POST["web"],$_POST["descript"]);
 		
 		if($result !== false && isset($result)){
 			$_SESSION["msg"] = $system->GetMessage("GAM001");
@@ -178,6 +178,22 @@ if(isset($_GET["id"])){
                         <label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("TICKETS");?>:</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" maxlength="800" name="tickets" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="Buď Text nebo odkaz" <?=($type == 1)? "value='".$info["Game_Tickets"]."'":"" ?> required />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="col-span-3 sm:col-span-2">
+                        <label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Web:</label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <input type="text" maxlength="800" name="web" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="Odkaz" <?=($type == 1)? "value='".$info["Game_Web"]."'":"" ?> />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="col-span-3 sm:col-span-2">
+                        <label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Popis:</label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <textarea id="descript" name="descript" rows="3" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" /><?=($type == 1)?$info["Game_Descript"]:""?></textarea>
                         </div>
                     </div>
                 </div>

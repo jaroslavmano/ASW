@@ -97,7 +97,7 @@ if(isset($_GET["id"])){
 					<div class="col-span-3 sm:col-span-2">
 						<label for="name" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("NAME");?>:</label>
 						<div class="mt-1 flex rounded-md shadow-sm">
-							<input type="text" name="name" maxlength="30" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="Tachnik" <?=($type == 1)? "value='".$tagInfo["Tag_Name"]."'":"" ?> required />
+							<input type="text" name="name" maxlength="30" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="Technik" <?=($type == 1)? "value='".$tagInfo["Tag_Name"]."'":"" ?> required />
 						</div>
 					</div>
 				</div>

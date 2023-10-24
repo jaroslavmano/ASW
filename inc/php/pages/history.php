@@ -76,6 +76,8 @@ $gameArray = $games->GetHistoryGames();
                 <p class="text-[<?=$system->SystemSettings["table_body_color"]?>]"><span class="font-bold text-gray-500 text-md">Zahájení:</span> <?=date("H:i",$game["Game_Date"])?></p>
                 <p class="text-[<?=$system->SystemSettings["table_body_color"]?>]"><span class="font-bold text-gray-500 text-md">Místo:</span> <?=(!empty($game["Game_Location"]) && substr($game["Game_Location"], 0, 4) === "http")?"<a class='text-[".$system->SystemSettings["link_color"]."] hover:text-[".$system->SystemSettings["link_color:hover"]."] hover:underline' href='".$game["Game_Location"]."'>odkaz</a>":$game["Game_Location"]?></p>
                 <p class="text-[<?=$system->SystemSettings["table_body_color"]?>]"><span class="font-bold text-gray-500 text-md">Limity:</span> <?=$game["Game_Limits"]?></p>
+                <p class="text-[<?=$system->SystemSettings["table_body_color"]?>]"><span class="font-bold text-gray-500 text-md">Web:</span> <?=!empty($game["Game_Location"])?"<a class='text-[".$system->SystemSettings["link_color"]."] hover:text-[".$system->SystemSettings["link_color:hover"]."] hover:underline' href='".$game["Game_Web"]."'>odkaz</a>":""?></p>
+                <p class="text-[<?=$system->SystemSettings["table_body_color"]?>]"><span class="font-bold text-gray-500 text-md">Popis:</span> <?=$game["Game_Descript"]?></p>
             </td>
             <?php
             if($modules->VerifyModule("STA") == 1 && in_array("stats_display",$LoginPermission)){
