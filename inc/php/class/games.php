@@ -42,13 +42,13 @@ class Games
     {
         global $db;
 
-        $sqlSelect = $db->Query("SELECT Game_Name,Game_Limits,Game_Location FROM " . constant("db_prefix") . "module_games");
+        $sqlSelect = $db->Query("SELECT * FROM " . constant("db_prefix") . "module_games");
 
         if ($sqlSelect) {
             $array = array();
             $sqlNames = $db->QueryData;
             foreach ($sqlNames as $name) {
-                $array[$name["Game_Name"]] = array($name["Game_Name"], $name["Game_Limits"], $name["Game_Location"]);
+                $array[$name["Game_Name"]] = array($name["Game_Name"], $name["Game_Limits"], $name["Game_Location"], $name["Game_Tickets"], $name["Game_Web"],$name["Game_Descript"] );
             }
             return json_encode(array_values($array), true);
         } else {

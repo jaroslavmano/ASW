@@ -177,7 +177,7 @@ if(isset($_GET["id"])){
                     <div class="col-span-3 sm:col-span-2">
                         <label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("TICKETS");?>:</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" maxlength="800" name="tickets" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="Buď Text nebo odkaz" <?=($type == 1)? "value='".$info["Game_Tickets"]."'":"" ?> required />
+                            <input type="text" maxlength="800" name="tickets" id="tickets" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="Buď Text nebo odkaz" <?=($type == 1)? "value='".$info["Game_Tickets"]."'":"" ?> required />
                         </div>
                     </div>
                 </div>
@@ -185,7 +185,7 @@ if(isset($_GET["id"])){
                     <div class="col-span-3 sm:col-span-2">
                         <label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Web:</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" maxlength="800" name="web" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="Odkaz" <?=($type == 1)? "value='".$info["Game_Web"]."'":"" ?> />
+                            <input type="text" maxlength="800" name="web" id="web" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="Odkaz" <?=($type == 1)? "value='".$info["Game_Web"]."'":"" ?> />
                         </div>
                     </div>
                 </div>
@@ -254,6 +254,9 @@ if(!isset($_GET["id"])){
     const input1 = document.getElementById('game');
     const input2 = document.getElementById('limits');
     const input3 = document.getElementById('location');
+    const input4 = document.getElementById('tickets');
+    const input5 = document.getElementById('web');
+    const input6 = document.getElementById('descript');
     const suggestions = document.getElementById('autocomplete-list');
 
     // Simulace návrhů pro první input
@@ -271,6 +274,9 @@ if(!isset($_GET["id"])){
                 input1.value = firstItem;
                 input2.value = subArray[1];
                 input3.value = subArray[2];
+                input4.value = subArray[3];
+                input5.value = subArray[4];
+                input6.value = subArray[5];
                 suggestions.style.display = 'none';
             });
             suggestions.appendChild(li);
