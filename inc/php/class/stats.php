@@ -91,14 +91,24 @@ class Stats{
             $countKill = count($dataKill);
             $countDeath = count($dataDeath);
 
+
+
             $averageKill = round(($sumKill / $countKill), 2);
             $averageDeath = round(($sumDeath / $countDeath), 2);
+
+            if(!isset($averageKill) || empty($averageKill)){
+                $averageKill = 0;
+            }
+
+            if(!isset($averageDeath) || empty($averageDeath)){
+                $averageDeath = 0;
+            }
 
             $ret = array("k" => $averageKill, "d" => $averageDeath);
 
             return $ret;
         } else {
-            return false;
+            return array("k" => 0, "d" => 0);
         }
     }
 
