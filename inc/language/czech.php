@@ -30,7 +30,7 @@ define("USER","UŽIVATEL");
 
 // GROUP
 define("SETTINGGROUP","Nastavení skupiny");
-define("CREATEGROUP","Vytvořoení skupiny");
+define("CREATEGROUP","Vytvoření skupiny");
 define("CREATENEWGROUP","Vytvořit skupinu");
 
 define("INFOGROUP","INFORMACE O SKUPINĚ");

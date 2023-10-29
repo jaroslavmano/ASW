@@ -65,7 +65,7 @@ $ranks = $ranksClass->Get();
 							<div class="p-3 w-[90%] sm:px-0 bg-black rounded-lg mx-auto my-4 md:my-0 md:w-[100%]">
 							<?php //Profilová fotka ?>
 								<div class="grid grid-cols-4 auto-cols-auto gap-2 m-4 md:gap-5 h-full place-items-center">
-									<img src="./inc/data/users/<?=((isset($userInfo[0]["User_Picture"]))?$userInfo[0]["User_Picture"]:"smile.png")?>" class="rounded-full ">
+									<img src="./inc/data/users/<?=((isset($userInfo[0]["User_Picture"]))?$userInfo[0]["User_Picture"]:"smile.png")?>" class="rounded-full h-24 w-24">
 									<div class="col-span-2 text-left">
 										<h1 class="md:text-2xl sm:text-xl text-[<?=$system->SystemSettings["color_1"]?>]"><?=$userInfo[0]["User_Username"]?> | <?=$userInfo[0]["User_ID"]?></h1>
 										<p class="md:text-xl sm:text-lg text-[<?=$system->SystemSettings["color_3"]?>]">(<?=$userInfo[0]["User_Name"]?>)</p>
@@ -78,7 +78,10 @@ $ranks = $ranksClass->Get();
                                                     foreach ($tags as $tag){
                                                         $tagClass = new Tags($tag);
                                                         $tagInfo = $tagClass->Info();
-                                                        echo '<span class="bg-['.$tagInfo["Tag_Color"].'] text-['.$tagInfo["Tag_TextColor"].'] text-base font-medium mr-2 px-2.5 py-0.5 whitespace-nowrap rounded">('.$tagInfo["Tag_Short"].')</span>';
+                                                        if(isset($tagInfo["Tag_Name"])){
+                                                            echo '
+                             <p class=" bg-['.$tagInfo["Tag_Color"].'] text-['.$tagInfo["Tag_TextColor"].'] font-medium px-2 py-0.5 text-center my-0.5 rounded">'.$tagInfo["Tag_Short"].'</p>';
+                                                        }
                                                     }
                                                 }
                                                 echo '</section>';

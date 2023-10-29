@@ -369,6 +369,14 @@ if($type == 0){
 					</div>
 				</div>
             </div>
+            <div class="grid grid-cols-1 gap-6">
+                <div class="col-span-3 sm:col-span-2">
+                    <label for="since" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Datum narození:</label>
+                    <div class="mt-1 flex rounded-md shadow-sm">
+                        <input type="date" name="since" id="since" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm"  <?=($type == 1)?"value='".date("Y-m-d",$UserInfo[0]["User_BirthDate"])."'":"" ?> required />
+                    </div>
+                </div>
+            </div>
 			<div class="px-4 py-3 text-right sm:px-6">
 				<button type="submit" name="SaveGameUser" class="justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium shadow-sm bg-[<?=$system->SystemSettings["button_bg"]?>]  text-[<?=$system->SystemSettings["button_color"]?>] align-middle inline-block rounded-md p-3 hover:text-[<?=$system->SystemSettings["button_color:hover"]?>] hover:bg-[<?=$system->SystemSettings["button_bg:hover"]?>] hover:cursor-pointer"><ion-icon name="save" class="inline-block align-middle"></ion-icon>  <?=constant("SAVE");?></button>
 	 		</div>
@@ -382,7 +390,7 @@ if($type == 0){
 					<div class="col-span-1">
 						<label for="phone" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Aktuální fotka:</label>
 						<div class="mt-1 flex rounded-md shadow-sm">
-							<img src="./inc/data/users/<?=(isset($UserInfo[0]["User_Picture"]))?$UserInfo[0]["User_Picture"]:"/smile.png"?>" />
+							<img src="./inc/data/users/<?=(isset($UserInfo[0]["User_Picture"]))?$UserInfo[0]["User_Picture"]:"/smile.png"?>" class="h-24 w-24" />
 						</div>
 					</div>
 					<div class="col-span-1">

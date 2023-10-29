@@ -67,7 +67,7 @@ if(!isset($_GET["id"])){
       <div class="px-4 sm:px-0">
         <?php //Profilová fotka ?>
 		  <div class="grid grid-cols-3 auto-cols-auto gap-5">
-			  <img src="./inc/data/users/<?=(isset($userInfo[0]["User_Picture"]))? $userInfo[0]["User_Picture"]:"/smile.png"?>" class="rounded-full ">
+			  <img src="./inc/data/users/<?=(isset($userInfo[0]["User_Picture"]))? $userInfo[0]["User_Picture"]:"/smile.png"?>" class="rounded-full h-24 w-24">
 			  <div class="col-span-2 text-left">
 			  	<h1 class="text-3xl md:text-2xl lg:text-2xl text-[<?=$system->SystemSettings["color_2"]?>]"><?=$userInfo[0]["User_Username"]?> | <span class="text-xl"> <?=$userInfo[0]["User_ID"]?></span></h1>
 				 <h2 class="text-2xl md:text-xl lg:text-xl text-[<?=$system->SystemSettings["color_3"]?>]">(<?=$userInfo[0]["User_Name"]?>)</h2>
@@ -92,8 +92,10 @@ if(!isset($_GET["id"])){
                         foreach ($tags as $tag){
                             $tagClass = new Tags($tag);
                             $tagInfo = $tagClass->Info();
-                            echo '
-                             <p class="bg-['.$tagInfo["Tag_Color"].'] text-['.$tagInfo["Tag_TextColor"].'] text-base font-medium mr-2 px-2.5 py-0.5 text-center my-1 rounded">'.$tagInfo["Tag_Name"].' ('.$tagInfo["Tag_Short"].')</p>';
+                            if(isset($tagInfo["Tag_Name"])){
+                                echo '
+                             <p class=" bg-['.$tagInfo["Tag_Color"].'] text-['.$tagInfo["Tag_TextColor"].'] text-base font-medium mr-2 px-2.5 py-0.5 text-center my-1 rounded">'.$tagInfo["Tag_Name"].'</p>';
+                            }
                         }
                     }
                 echo '</section>';
