@@ -72,7 +72,7 @@ $gameArray = $games->GetHistoryGames();
                 <h2 class="font-bold text-xl text-[<?=$system->SystemSettings["table_head_color"]?>] uppercase "><?=$game["Game_Name"]?></h2>
                 <?=date("d.m.Y",$game["Game_Date"])?>
             </td>
-            <td class="px-6 py-4 min-w-full">
+            <td class="px-6 py-4 w-[50%]">
                 <p class="text-[<?=$system->SystemSettings["table_body_color"]?>]"><span class="font-bold text-gray-500 text-md">Zahájení:</span> <?=date("H:i",$game["Game_Date"])?></p>
                 <p class="text-[<?=$system->SystemSettings["table_body_color"]?>]"><span class="font-bold text-gray-500 text-md">Místo:</span> <?=(!empty($game["Game_Location"]) && substr($game["Game_Location"], 0, 4) === "http")?"<a class='text-[".$system->SystemSettings["link_color"]."] hover:text-[".$system->SystemSettings["link_color:hover"]."] hover:underline' href='".$game["Game_Location"]."'>odkaz</a>":$game["Game_Location"]?></p>
                 <p class="text-[<?=$system->SystemSettings["table_body_color"]?>]"><span class="font-bold text-gray-500 text-md">Limity:</span> <?=$game["Game_Limits"]?></p>
@@ -84,7 +84,7 @@ $gameArray = $games->GetHistoryGames();
                 $stats = new Stats($game["Game_ID"]);
                 $average  = $stats->GetAnonymous("Complete")
                 ?>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 w-[30%]">
                 <div class="grid grid-cols-1 gap-6">
                     <div class="col-span-3 sm:col-span-2">
                         <label for="name" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Celokvé hodnocení</label>
