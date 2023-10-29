@@ -49,11 +49,11 @@ class Tags{
 	}
 
 	
-	public function Create($name,$short, $color, $text){
+	public function Create($name,$short, $color, $text, $discordID){
 		global $db;
 		
-		$params = array(array("code"=>":name","value"=>$name),array("code"=>":short","value"=>$short),array("code"=>":color","value"=>$color),array("code"=>":text","value"=>$text));
-		$sqlSelect = $db->Query("INSERT INTO ".constant("db_prefix")."module_tags (Tag_Name, Tag_Short, Tag_Color, Tag_TextColor) VALUES(:name, :short, :color, :text);",$params);
+		$params = array(array("code"=>":name","value"=>$name),array("code"=>":short","value"=>$short),array("code"=>":color","value"=>$color),array("code"=>":text","value"=>$text),array("code"=>":discordID","value"=>$discordID));
+		$sqlSelect = $db->Query("INSERT INTO ".constant("db_prefix")."module_tags (Tag_Name, Tag_Short, Tag_Color, Tag_TextColor,Tag_DiscordID) VALUES(:name, :short, :color, :text,:discordID);",$params);
 		
 		if($sqlSelect){
 			return $db->LastID;
@@ -62,7 +62,7 @@ class Tags{
 		}
 	}
 	
-	public function Update($name,$short, $color,$text){
+	public function Update($name,$short, $color,$text,$discordID){
 		global $db;
 
         $params = array(
@@ -70,8 +70,9 @@ class Tags{
             array("code"=>":short","value"=>$short),
             array("code"=>":color","value"=>$color),
             array("code"=>":text","value"=>$text),
+            array("code"=>":discordID","value"=>$discordID),
             array("code"=>":id","value"=>$this->id));
-		$sqlSelect = $db->Query("UPDATE ".constant("db_prefix")."module_tags SET Tag_Name=:name,Tag_Short=:short,Tag_Color=:color, Tag_TextColor=:text WHERE Tag_ID=:id",$params);
+		$sqlSelect = $db->Query("UPDATE ".constant("db_prefix")."module_tags SET Tag_Name=:name,Tag_Short=:short,Tag_Color=:color, Tag_TextColor=:text, Tag_DiscordID=:discordID WHERE Tag_ID=:id",$params);
 		
 		if($sqlSelect){
 			return true;

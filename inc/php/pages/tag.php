@@ -9,7 +9,7 @@
     }
 if(isset($_POST["SaveInfoTag"])){
     if(isset($_GET["id"])){
-		$result = $tags->Update($_POST["name"],$_POST["short"], $_POST["color"], $_POST["textcolor"]);
+		$result = $tags->Update($_POST["name"],$_POST["short"], $_POST["color"], $_POST["textcolor"],$_POST["discordid"]);
 		if($result === true){
 			$_SESSION["msg"] = $system->GetMessage("TAG002");
 			unset($_POST);
@@ -18,7 +18,7 @@ if(isset($_POST["SaveInfoTag"])){
 			echo $system->GetMessage("TAG202");
 		}
 	} else {
-		$result = $tags->Create($_POST["name"],$_POST["short"], $_POST["color"],$_POST["textcolor"]);
+		$result = $tags->Create($_POST["name"],$_POST["short"], $_POST["color"],$_POST["textcolor"],$_POST["discordid"]);
 		
 		if($result !== false && isset($result)){
 			$_SESSION["msg"] = $system->GetMessage("RA001");
@@ -111,7 +111,15 @@ if(isset($_GET["id"])){
 				</div>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="col-span-3 sm:col-span-2">
-                        <label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("COLOR");?>:</label>
+                        <label for="discordid" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Discord ID:</label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <input type="text" name="discordid" maxlength="50" class="block w-full flex-1 rounded-md text-[<?=$system->SystemSettings["input_color"]?>] bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" placeholder="" <?=($type == 1 && isset($tagInfo["Tag_DiscordID"]))? "value='".$tagInfo["Tag_DiscordID"]."'":"" ?> />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="col-span-3 sm:col-span-2">
+                        <label for="color" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("COLOR");?>:</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="color" name="color" maxlength="30" class="block flex-1 w-full rounded-md text-[<?=$system->SystemSettings["input_color"]?> bg-[<?=$system->SystemSettings["input_bg"]?>] sm:text-sm" <?=($type == 1)? "value='".$tagInfo["Tag_Color"]."'":"" ?> required="">
                         </div>
@@ -119,7 +127,7 @@ if(isset($_GET["id"])){
                 </div>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="col-span-3 sm:col-span-2">
-                        <label for="short" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("TEXT-COLOR");?>:</label>
+                        <label for="textcolor" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]"><?=constant("TEXT-COLOR");?>:</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="color" name="textcolor" maxlength="30" class="block flex-1 w-full rounded-md text-[<?=$system->SystemSettings["input_color"]?> bg-[<?=$system->SystemSettings["input_bg"]?>] sm:text-sm" <?=($type == 1)? "value='".$tagInfo["Tag_TextColor"]."'":"" ?> required="">
                         </div>
