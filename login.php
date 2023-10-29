@@ -32,17 +32,17 @@
 			<img src="<?=$system->SystemSettings["system_logo"]?>" class="w-[80%] mx-auto my-4">
 			<a href="./login/process.php?action=login" class="bg-[<?=$system->SystemSettings["login_button_bg"]?>] text-[<?=$system->SystemSettings["login_button_color"]?>] align-middle inline-block rounded-md p-3 text-2xl hover:bg-[<?=$system->SystemSettings["login_button_bg:hover"]?>] hover:text-[<?=$system->SystemSettings["login_button_color:hover"]?>] hover:cursor-pointer md:text-3xl lg:text-4xl "><ion-icon name="logo-discord" class="inline-block align-middle"></ion-icon> Přihlásit se!</a>	
 		</header>
-		<footer class="m-auto text-center text-[<?=$system->SystemSettings["login_color"]?>] mt-5 text-lg ">
-			<?=((!empty($system->SystemSettings["social_discord"]))?'<a href="'.$system->SystemSettings["social_discord"].'" class="hover:text-blue-700 hover:cursor-pointer"><ion-icon  name="logo-discord"></ion-icon></a>':'')?>
-			<?=((!empty($system->SystemSettings["social_twitter"]))?'<a href="'.$system->SystemSettings["social_twitter"].'" class="hover:text-blue-400 hover:cursor-pointer"><ion-icon  name="logo-twitter"></ion-icon></a>':'')?>
-			<?=((!empty($system->SystemSettings["social_twitch"]))?'<a href="'.$system->SystemSettings["social_twitch"].'" class="hover:text-purple-500 hover:cursor-pointer"><ion-icon name="logo-twitch"></ion-icon></a>':'')?>
-			<?=((!empty($system->SystemSettings["social_tiktok"]))?'<a href="'.$system->SystemSettings["social_tiktok"].'" class="hover:text-black hover:cursor-pointer"><ion-icon name="logo-tiktok"></ion-icon></a>':'')?>
+		<footer class="m-auto text-center text-[<?=$system->SystemSettings["login_color"]?>] mt-5 text-xl ">
+			<?=((!empty($system->SystemSettings["social_discord"]))?'<a href="'.$system->SystemSettings["social_discord"].'" class="hover:text-blue-700 hover:cursor-pointer text-xl" style="font-size: 2rem;"><ion-icon class="text-xl" name="logo-discord"></ion-icon></a>':'')?>
+			<?=((!empty($system->SystemSettings["social_twitter"]))?'<a href="'.$system->SystemSettings["social_twitter"].'" class="hover:text-blue-400 hover:cursor-pointer" style="font-size: 2rem;"><ion-icon  name="logo-twitter"></ion-icon></a>':'')?>
+			<?=((!empty($system->SystemSettings["social_twitch"]))?'<a href="'.$system->SystemSettings["social_twitch"].'" class="hover:text-purple-500 hover:cursor-pointer" style="font-size: 2rem;"><ion-icon name="logo-twitch"></ion-icon></a>':'')?>
+			<?=((!empty($system->SystemSettings["social_tiktok"]))?'<a href="'.$system->SystemSettings["social_tiktok"].'" class="hover:text-black hover:cursor-pointer" style="font-size: 2rem;"><ion-icon name="logo-tiktok"></ion-icon></a>':'')?>
 			
-			<?=((!empty($system->SystemSettings["social_facebook"]))?'<a href="'.$system->SystemSettings["social_facebook"].'" class="hover:text-blue-700 hover:cursor-pointer"><ion-icon name="logo-facebook"></ion-icon></a>':'')?>
+			<?=((!empty($system->SystemSettings["social_facebook"]))?'<a href="'.$system->SystemSettings["social_facebook"].'" class="hover:text-blue-700 hover:cursor-pointer " style="font-size: 2rem;" ><ion-icon  name="logo-facebook"></ion-icon></a>':'')?>
 			
-			<?=((!empty($system->SystemSettings["social_instagram"]))?'<a href="'.$system->SystemSettings["social_instagram"].'" class="hover:text-pink-600 hover:cursor-pointer"><ion-icon name="logo-instagram"></ion-icon></a>':'')?>
+			<?=((!empty($system->SystemSettings["social_instagram"]))?'<a href="'.$system->SystemSettings["social_instagram"].'" class="hover:text-pink-600 hover:cursor-pointer" style="font-size: 2rem;"><ion-icon name="logo-instagram"></ion-icon></a>':'')?>
 			
-			<?=((!empty($system->SystemSettings["social_youtube"]))?'<a href="'.$system->SystemSettings["social_youtube"].'" class="hover:text-red-500 hover:cursor-pointer"><ion-icon name="logo-youtube"></ion-icon></a>':'')?>
+			<?=((!empty($system->SystemSettings["social_youtube"]))?'<a href="'.$system->SystemSettings["social_youtube"].'" class="hover:text-red-500 hover:cursor-pointer" style="font-size: 2rem;"><ion-icon name="logo-youtube"></ion-icon></a>':'')?>
 		</footer>
 	</section>
 </body>
