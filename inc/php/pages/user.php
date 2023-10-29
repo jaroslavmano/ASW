@@ -64,12 +64,18 @@ if(isset($_POST["SaveInfoUser"])){
 		$File_Check = getimagesize($_FILES["File"]["tmp_name"]);
 		$File_Size = $_FILES["File"]["size"];
 		$File_Temp = $_FILES["File"]["tmp_name"];
-		$target_dir = "inc/data/users/";
-		
-		$returnPicture = ControlFile($File_Name, $File_Check, $target_dir, $File_Size, $File_Temp);
+
+        $target_dir = "inc/data/users/";
+
+
+        $type = strtolower(pathinfo($File_Name,PATHINFO_EXTENSION));
+        $fileNewName = tempnam("", 'userPhoto_');
+        $File_New = str_replace("/tmp/","",$fileNewName).".$type";
+
+		$returnPicture = ControlFile($File_New, $File_Check, $target_dir, $File_Size, $File_Temp);
 		
 		if($returnPicture === true){
-			$result = $users->UserUpdatePicture($File_Name);
+			$result = $users->UserUpdatePicture($File_New);
 			if($result === true){
 				AddMsg("US006");
 				unset($_POST);
