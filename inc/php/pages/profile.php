@@ -163,12 +163,22 @@ if(!isset($_GET["id"])){
             </div>
 			 <?php
 				if((!isset($_GET["id"]) || $type) || $userInfo[0]["User_DisplayBDay"]){
+                    $aktualniTimestamp = time();
+
+                    $vek = date("Y", $aktualniTimestamp) - date("Y", $userInfo[0]["User_BirthDate"]);
+                    $bg = "";
+                    // Porovná věk s minimálním věkem 18 let
+                    if ($vek >= 18) {
+                       $bg = $system->SystemSettings["input_bg"];
+                    } else {
+                        $bg= $system->SystemSettings["background_date<18"];
+                    }
 			?>
             <div class="grid grid-cols-3 gap-6">
               <div class="col-span-3 sm:col-span-2">
                 <label for="bday" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Datum narození:</label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="bday" class="block w-full flex-1 rounded-md text-white bg-[<?=$system->SystemSettings["input_bg"]?>] p-2 sm:text-sm" value="<?=date("d/m/Y",$userInfo[0]["User_BirthDate"])?>" readonly disabled />
+                  <input type="text" name="bday" class="block w-full flex-1 rounded-md text-white bg-[<?=$bg?>] p-2 sm:text-sm" value="<?=date("d/m/Y",$userInfo[0]["User_BirthDate"])?>" readonly disabled />
                 </div>
               </div>
             </div>
