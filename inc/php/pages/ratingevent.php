@@ -176,7 +176,7 @@ if(isset($_POST["SaveStats"])){
                 <?php }  if(in_array("stats_ratingcomplete",$LoginPermission)){?>
                     <div class="grid grid-cols-1 gap-6">
                         <div class="col-span-3 sm:col-span-2">
-                            <label for="name" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Hodnocení členů týmu na akci: <small class="text-[<?=$system->SystemSettings["color_3"]?>]">* data jsou anonimizována</small></label>
+                            <label for="name" class="block text-sm font-medium text-[<?=$system->SystemSettings["color_1"]?>]">Celkové hodnocení akce: <small class="text-[<?=$system->SystemSettings["color_3"]?>]">* data jsou anonimizována</small></label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <div class="hodnoceni">
                                     <input type="radio" id="complete1" name="complete" value="5">
